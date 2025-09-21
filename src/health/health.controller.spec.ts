@@ -12,7 +12,9 @@ describe('HealthController', () => {
     controller = module.get<HealthController>(HealthController);
   });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
+  it('GET /health → returns ok with uptime', () => {
+    const res = controller.check();
+    expect(res.status).toBe('ok');
+    expect(typeof res.uptime).toBe('number');
   });
 });

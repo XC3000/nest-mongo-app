@@ -31,4 +31,13 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-argument': 'warn'
     },
   },
+  {
+    files: ['**/*.spec.ts', '**/*.test.ts'],
+    rules: {
+      // In Jest tests we commonly pass mock functions to expect(), which
+      // triggers @typescript-eslint/unbound-method. Disable it here to avoid
+      // false positives specific to test files.
+      '@typescript-eslint/unbound-method': 'off',
+    },
+  },
 );
