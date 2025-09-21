@@ -38,7 +38,7 @@ describe('TodosService', () => {
     const created = { _id: '1', ...dto, done: false };
     model.create.mockResolvedValue(created);
 
-    const res = await service.create(dto as any);
+    const res = await service.create(dto);
     expect(model.create).toHaveBeenCalledWith(dto);
     expect(res).toEqual(created);
   });
@@ -75,7 +75,7 @@ describe('TodosService', () => {
     const updated = { _id: '1', title: 'U' };
     model.lean.mockResolvedValueOnce(updated);
 
-    const res = await service.update('1', { title: 'U' } as any);
+    const res = await service.update('1', { title: 'U' });
     expect(model.findByIdAndUpdate).toHaveBeenCalledWith(
       '1',
       { title: 'U' },
@@ -86,7 +86,7 @@ describe('TodosService', () => {
 
   it('should throw NotFound on update', async () => {
     model.lean.mockResolvedValueOnce(null);
-    await expect(service.update('x', { title: 'U' } as any)).rejects.toThrow(
+    await expect(service.update('x', { title: 'U' })).rejects.toThrow(
       NotFoundException,
     );
   });
